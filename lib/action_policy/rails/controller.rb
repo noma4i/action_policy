@@ -23,7 +23,9 @@ module ActionPolicy
     include ActionPolicy::Behaviours::Namespaced
 
     included do
-      helper_method :allowed_to? if respond_to?(:helper_method)
+      helper_method :allowed_to?, :check? if respond_to?(:helper_method)
+
+      alias_method :check?, :allowed_to?
 
       attr_writer :authorize_count
       attr_reader :verify_authorized_skipped
